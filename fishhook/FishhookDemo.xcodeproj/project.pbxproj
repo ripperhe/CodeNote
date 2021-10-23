@@ -33,6 +33,7 @@
 		C90C714C26FB0A9F00BC21CC /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; tabWidth = 4; };
 		C90C714F26FB0AF000BC21CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C90C71CF26FB0C9A00BC21CC /* b.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = b.m; sourceTree = "<group>"; };
+		C9E9DF07272442D2009C4055 /* Code.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Code.md; sourceTree = "<group>"; };
 		C9EDA18F271FFF6000C3F87A /* libBBB.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBBB.dylib; path = libB/libBBB.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,9 +70,8 @@
 		C90C714326FB0A8700BC21CC /* FishhookDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C9E9DF06272442AE009C4055 /* fishhook */,
 				C90C714426FB0A8700BC21CC /* main.m */,
-				C90C714B26FB0A9F00BC21CC /* fishhook.h */,
-				C90C714C26FB0A9F00BC21CC /* fishhook.c */,
 			);
 			path = FishhookDemo;
 			sourceTree = "<group>";
@@ -91,6 +91,16 @@
 				C90C71CF26FB0C9A00BC21CC /* b.m */,
 			);
 			path = libB;
+			sourceTree = "<group>";
+		};
+		C9E9DF06272442AE009C4055 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9DF07272442D2009C4055 /* Code.md */,
+				C90C714B26FB0A9F00BC21CC /* fishhook.h */,
+				C90C714C26FB0A9F00BC21CC /* fishhook.c */,
+			);
+			path = fishhook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

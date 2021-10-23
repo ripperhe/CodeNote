@@ -1,7 +1,3 @@
-
-/// @ripper: 阅读库版本如下
-/// https://github.com/facebook/fishhook/tree/aadc161ac3b80db07a9908851839a17ba63a9eb1
-
 // Copyright (c) 2013, Facebook, Inc.
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without
