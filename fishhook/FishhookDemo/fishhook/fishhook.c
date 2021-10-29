@@ -157,14 +157,21 @@ static void perform_rebinding_with_section(struct rebindings_entry *rebindings,
                     }
                     // 将重绑定信息中新的符号地址赋值给当前符号地址
                     indirect_symbol_bindings[i] = cur->rebindings[j].replacement;
-                    // 跳出循环
-                    // FIXME: hezongyi 所以这里看起来是只要找到了和当前符号匹配的重绑定信息就跳出循环了，也就意味着一个符号只能被重绑定一次？
+                    // 跳出循环 while 循环
+                    // 每次调用 rebind_symbols 方法的时候都会生成一个 rebindings_entry 结构体
+                    // 每个 rebindings_entry 结构体里面可能会有多个 rebinding 结构体，每个代表一个函数替换
+                    // 每次都会将新的 rebindings_entry 放到指针头部
+                    // 从 rebindings_entry 头指针开始遍历，当前符号需要替换的信息，就将其替换
+                    // 然后就跳出对 rebindings_entry 链表的 while 循环
+                    // 然后通过外层的 for 循环看下一个符号是否需要替换
+                    // 指导当前 section 的所有符号被遍历完毕
                     goto symbol_loop;
                 }
             }
             // 将重绑定条目的 next 赋值给 cur，然后循环遍历下一个重绑定条目里面的所有信息
             cur = cur->next;
         }
+        // 进入下一个符号的遍历
     symbol_loop:;
     }
 }
