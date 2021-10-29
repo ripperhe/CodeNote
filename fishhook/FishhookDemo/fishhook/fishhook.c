@@ -232,8 +232,8 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
     }
     
     // linkedit_segment->vmaddr 代表该 segment 虚拟内存地址
-    // linkedit_segment->fileoff 代表该 segment 相对镜像头部的偏移
-    // (linkedit_segment->vmaddr - linkedit_segment->fileoff) 则为虚拟的镜像头部（基地址）
+    // linkedit_segment->fileoff 代表该 segment 相对镜像头部的偏移（也就是相对于 __TEXT 段头部的偏移）
+    // (linkedit_segment->vmaddr - linkedit_segment->fileoff) 则为虚拟的镜像头部（基地址，__TEXT 段的虚拟地址）
     // 由于每个镜像都要加上 slide(ASLR 偏移)
     // 真实的基地址 = ASLR 偏移 + linkedit_segment 虚拟地址 - linkedit_segment 偏移
     // Find base symbol/string table addresses
