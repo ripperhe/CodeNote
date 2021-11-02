@@ -45,9 +45,24 @@
     #define FMT_RJ_SPACES "10"
 #endif
 
+// FIXME: hezongyi 解析每个宏定义细节
+/**
+ PRIxPTR 相关
+ 
+ https://www.zhihu.com/question/447647912
+ */
+
 #define FMT_PTR_SHORT        @"0x%" PRIxPTR
 #define FMT_PTR_LONG         @"0x%0" FMT_LONG_DIGITS PRIxPTR
 #define FMT_PTR_RJ           @"%#" FMT_RJ_SPACES PRIxPTR
+/**
+ 如果要把一个指针用一个整型放下来，最标准的整型类型应该是intptr_t/uintptr_t。
+ 
+ sizet类型在 printf 格式中，标准格式符是 z。如果是上面提到的intptr_t/uintptr_t呢，你就只能用 PRIdPTR/PRIuPTR 这种反人类的方式了——怎么反人类？format 串用%d写成这样的话："xxx=%d yyy"，这时你要写成："xxx=%" PRIuPTR "yyy" 这样的形式。
+ 
+ https://www.zhihu.com/question/313519801
+ */
+/// PRIuPTR 专门用来打印指针
 #define FMT_OFFSET           @"%" PRIuPTR
 #define FMT_TRACE_PREAMBLE       @"%-4d%-31s " FMT_PTR_LONG
 #define FMT_TRACE_UNSYMBOLICATED FMT_PTR_SHORT @" + " FMT_OFFSET
@@ -296,30 +311,45 @@ static NSDictionary* g_registerOrders;
     int traceNum = 0;
     for(NSDictionary* trace in [backtrace objectForKey:@KSCrashField_Contents])
     {
+        // 崩溃指令地址
         uintptr_t pc = (uintptr_t)[[trace objectForKey:@KSCrashField_InstructionAddr] longLongValue];
+        // 崩溃镜像地址
         uintptr_t objAddr = (uintptr_t)[[trace objectForKey:@KSCrashField_ObjectAddr] longLongValue];
+        // 崩溃镜像名字
         NSString* objName = [[trace objectForKey:@KSCrashField_ObjectName] lastPathComponent];
+        // 崩溃指令最近的符号地址
         uintptr_t symAddr = (uintptr_t)[[trace objectForKey:@KSCrashField_SymbolAddr] longLongValue];
+        // 崩溃指令最近的符号名字
         NSString* symName = [trace objectForKey:@KSCrashField_SymbolName];
+        // 是否崩溃到当前进程镜像（非动态库的镜像）
         bool isMainExecutable = mainExecutableName && [objName isEqualToString:mainExecutableName];
+        // 符号格式
         KSAppleReportStyle thisLineStyle = reportStyle;
         if(thisLineStyle == KSAppleReportStylePartiallySymbolicated)
         {
+            // 如果是符号化除主镜像的所有镜像；将主镜像设置为 KSAppleReportStyleUnsymbolicated
             thisLineStyle = isMainExecutable ? KSAppleReportStyleUnsymbolicated : KSAppleReportStyleSymbolicated;
         }
 
+        // 堆栈下标（逆序排列）；镜像名字；崩溃指令地址
+        // e.g. 0   CoreFoundation                  0x00000001839a9654
         NSString* preamble = [NSString stringWithFormat:FMT_TRACE_PREAMBLE, traceNum, [objName UTF8String], pc];
+        // 镜像地址；崩溃指令地址相对镜像地址的偏移（崩溃指令地址 - 镜像地址）
+        // e.g. 0x18387f000 + 1222228
         NSString* unsymbolicated = [NSString stringWithFormat:FMT_TRACE_UNSYMBOLICATED, objAddr, pc - objAddr];
+        // 符号名字
         NSString* symbolicated = @"(null)";
         if(thisLineStyle != KSAppleReportStyleUnsymbolicated && [symName isKindOfClass:[NSString class]])
         {
+            // 如果本行需要符号化，并且有符号名
+            // 符号名；崩溃指令地址相对于最近符号地址的偏移（崩溃指令地址 - 符号地址）
             symbolicated = [NSString stringWithFormat:FMT_TRACE_SYMBOLICATED, symName, pc - symAddr];
         }
         else
         {
+            // 标记为未符号化
             thisLineStyle = KSAppleReportStyleUnsymbolicated;
         }
-
 
         // Apple has started replacing symbols for any function/method
         // beginning with an underscore with "<redacted>" in iOS 6.
@@ -327,22 +357,28 @@ static NSDictionary* g_registerOrders;
         if(thisLineStyle == KSAppleReportStyleSymbolicated &&
            [symName isEqualToString:kAppleRedactedText])
         {
+            // 从 iOS 开始系统库的符号名被替换为 "<redacted>"
+            // 所以当发现符号名为 "<redacted>" 时，并且风格为 KSAppleReportStyleSymbolicated 时，标记为未符号化
             thisLineStyle = KSAppleReportStyleUnsymbolicated;
         }
 
         switch (thisLineStyle)
         {
             case KSAppleReportStyleSymbolicatedSideBySide:
+                // 将未符号化和符号化的数据都放在上面
                 [str appendFormat:@"%@ %@ (%@)\n", preamble, unsymbolicated, symbolicated];
                 break;
             case KSAppleReportStyleSymbolicated:
+                // 只显示符号化后的数据
                 [str appendFormat:@"%@ %@\n", preamble, symbolicated];
                 break;
             case KSAppleReportStylePartiallySymbolicated: // Should not happen
             case KSAppleReportStyleUnsymbolicated:
+                // 只显示未符号化的数据
                 [str appendFormat:@"%@ %@\n", preamble, unsymbolicated];
                 break;
         }
+        // 自增堆栈计数
         traceNum++;
     }
 
