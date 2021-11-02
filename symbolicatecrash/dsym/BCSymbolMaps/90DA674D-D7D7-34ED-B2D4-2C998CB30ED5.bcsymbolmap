@@ -1,0 +1,68 @@
+BCSymbolMap Version: 2.0
+-[ViewController viewDidLoad]
+-[ViewController buttonClicked:]
+_OBJC_CLASS_$_ViewController
+_OBJC_SELECTOR_REFERENCES_
+__OBJC_METACLASS_RO_$_ViewController
+_OBJC_METACLASS_$_ViewController
+__OBJC_$_INSTANCE_METHODS_ViewController
+__OBJC_CLASS_RO_$_ViewController
+Apple clang version 13.0.0 (clang-1300.0.29.3)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk
+iPhoneOS15.0.sdk
+/Users/ripper/Desktop/CodeNote/KSCrash/KSCrashDemo/ViewController.m
+/Users/ripper/Desktop/CodeNote/KSCrash
+KSCrashDemo/ViewController.m
+-[AppDelegate application:didFinishLaunchingWithOptions:]
+-[AppDelegate installCrashHandler]
+___34-[AppDelegate installCrashHandler]_block_invoke
+-[AppDelegate makeEmailInstallation]
+-[AppDelegate window]
+-[AppDelegate setWindow:]
+-[AppDelegate .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_SELECTOR_REFERENCES_.8
+___block_descriptor_32_e32_v28?0"NSArray"8B16"NSError"20l
+___block_literal_global
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_SELECTOR_REFERENCES_.15
+_OBJC_CLASSLIST_REFERENCES_$_.18
+_OBJC_CLASSLIST_REFERENCES_$_.19
+_OBJC_SELECTOR_REFERENCES_.21
+_OBJC_SELECTOR_REFERENCES_.23
+_OBJC_SELECTOR_REFERENCES_.27
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.45
+_OBJC_SELECTOR_REFERENCES_.47
+_OBJC_IVAR_$_AppDelegate._window
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSObject
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_NSObject
+__OBJC_$_PROP_LIST_NSObject
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSObject
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_$_PROTOCOL_REFS_UIApplicationDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_UIApplicationDelegate
+__OBJC_$_PROP_LIST_UIApplicationDelegate
+__OBJC_$_PROTOCOL_METHOD_TYPES_UIApplicationDelegate
+__OBJC_PROTOCOL_$_UIApplicationDelegate
+__OBJC_LABEL_PROTOCOL_$_UIApplicationDelegate
+__OBJC_CLASS_PROTOCOLS_$_AppDelegate
+__OBJC_METACLASS_RO_$_AppDelegate
+_OBJC_METACLASS_$_AppDelegate
+__OBJC_$_INSTANCE_METHODS_AppDelegate
+__OBJC_$_INSTANCE_VARIABLES_AppDelegate
+__OBJC_$_PROP_LIST_AppDelegate
+__OBJC_CLASS_RO_$_AppDelegate
+_OBJC_CLASS_$_AppDelegate
+/Users/ripper/Desktop/CodeNote/KSCrash/KSCrashDemo/AppDelegate.m
+KSCrashDemo/AppDelegate.m
+KSCrashDemo/AppDelegate.h
+__34-[AppDelegate installCrashHandler]_block_invoke
+/Users/ripper/Desktop/CodeNote/KSCrash/KSCrashDemo/main.m
+main
+KSCrashDemo/main.m

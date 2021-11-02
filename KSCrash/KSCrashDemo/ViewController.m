@@ -22,13 +22,13 @@
     NSLog(@"点击按钮");
     
     // 1
-//    char* ptr = (char*)-1;
-//    *ptr = 10;
+    char* ptr = (char*)-1;
+    *ptr = 10;
     
     
     // 2
-    NSArray *array = @[@1, @2];
-    NSLog(@"%@", array[2]);
+//    NSArray *array = @[@1, @2];
+//    NSLog(@"%@", array[2]);
 }
 
 @end
